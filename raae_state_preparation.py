@@ -12,12 +12,13 @@ from qiskit_aer import AerSimulator
 from qiskit.quantum_info import Statevector, partial_trace
 
 def normalize(input_vector):
-  return ( 1/np.linalg.norm(input_vector) )* input_vector
-
+  norm = np.linalg.norm(input_vector)
+  if norm == 0:
+      return input_vector  # Returns the original zero vector
+  return input_vector / norm
 
 def g(i) :  # binary grey code return functions
   return i ^ (i >> 1)
-
 
 def ind(k) : # gives the control index required while appling the required c-x gates
 
